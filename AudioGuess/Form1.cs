@@ -95,7 +95,7 @@ namespace AudioGuess
                     string[] files = Directory.GetFiles(fbd.SelectedPath);
                     if (files.Length < 3)
                     {
-                        MessageBox.Show("Выберите папку с музыкальными файлами в количестве больше или равном трем!");
+                        MessageBox.Show("Выберите папку с музыкальными файлами в количестве больше или равном 3!");
                         return;
                     }
                     folderPathLabel.Text = fbd.SelectedPath;
