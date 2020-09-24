@@ -15,19 +15,50 @@ namespace AudioGuess
     public partial class Form1 : Form
     {
         public string tempFolderPath = "";
+        public string currentSound = "";
         public List<string> soundsPaths = new List<string>();
         public List<string> soundsAllPaths = new List<string>();
-        public string currentSound = "";
+        public List<Button> chooseButtons = new List<Button>();
+        public bool isStarted = false;
+        public System.Media.SoundPlayer snd = null;
+
+
         public Form1()
         {
             InitializeComponent();
             this.Text = "Угадай мелодию";
-            //File.Delete(@"C:\Users\recon\OneDrive\Рабочий стол\test.trimmed.mp3");
+            
+
+            Init();
 
             var mp3Path = @"C:\Users\recon\OneDrive\Рабочий стол\test.mp3";
             var outputPath = Path.ChangeExtension(mp3Path, ".trimmed.mp3");
 
             //TrimMp3To30Sec(mp3Path, outputPath, 2);
+        }
+
+        public void Init()
+        {
+            tempFolderPath = "";
+            currentSound = "";
+            soundsPaths = new List<string>();
+            soundsAllPaths = new List<string>();
+            chooseButtons = new List<Button>();
+            isStarted = false;
+            snd = null;
+            chooseButtons.Add(a1);
+            chooseButtons.Add(a2);
+            chooseButtons.Add(a3);
+            ResetComponents();
+        }
+
+        public void ResetComponents()
+        {
+            a1.Text = "Вариант ответа";
+            a2.Text = "Вариант ответа";
+            a2.Text = "Вариант ответа";
+            button2.Enabled = true;
+            folderPathLabel.Text = "";
         }
 
        
@@ -64,8 +95,14 @@ namespace AudioGuess
 
                 if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
                 {
-                    folderPathLabel.Text = fbd.SelectedPath;
+                    
                     string[] files = Directory.GetFiles(fbd.SelectedPath);
+                    if (files.Length < 3)
+                    {
+                        MessageBox.Show("Выберите папку с музыкальными файлами в количестве больше или равном трем!");
+                        return;
+                    }
+                    folderPathLabel.Text = fbd.SelectedPath;
                     var outputPath = Path.Combine(fbd.SelectedPath, "Temp");
                     tempFolderPath = outputPath;
                     Directory.CreateDirectory(outputPath);
@@ -82,6 +119,11 @@ namespace AudioGuess
 
         private void OnClosedForm(object sender, FormClosedEventArgs e)
         {
+            DeleteTemp();
+        }
+
+        public void DeleteTemp()
+        {
             if (tempFolderPath != "")
             {
                 if (Directory.Exists(tempFolderPath))
@@ -96,23 +138,32 @@ namespace AudioGuess
                 }
             }
         }
+
         public void PlaySound()
-        {            
-            System.Media.SoundPlayer snd = new System.Media.SoundPlayer(currentSound);
-            snd.Load();
-            snd.PlaySync();
+        {
+            if (isStarted)
+            {
+                snd = new System.Media.SoundPlayer(currentSound);
+                snd.Load();
+                snd.Play();
+            }
+            else
+            {
+                MessageBox.Show("Вы еще не начали игру!");
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             if (tempFolderPath != "")
             {
+                isStarted = true;
                 Button startButton = sender as Button;
                 startButton.Enabled = false;
                 if (Directory.Exists(tempFolderPath))
                 {
                     soundsPaths = new List<string>(Directory.GetFiles(tempFolderPath));
-                    soundsAllPaths = soundsPaths;
+                    soundsAllPaths = new List<string>(soundsPaths);
                     SelectRandomSound();
                 }
             }else
@@ -120,12 +171,46 @@ namespace AudioGuess
                 MessageBox.Show("Выберите папку!");
             }
         }
+
+        private void OnChooseButtonPressed(object sender, EventArgs e)
+        {
+            if (isStarted)
+            {
+                var currentSoundFilename = currentSound.Substring(currentSound.LastIndexOf('\\') + 1);
+                Button pressedButton = sender as Button;
+                if (currentSoundFilename == pressedButton.Text)
+                {
+                    if (snd != null)
+                    {
+                        snd.Stop();
+                    }
+                    SelectRandomSound();
+                }
+                else
+                {
+                    MessageBox.Show("Неверно! Попробуйте еще раз!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Вы еще не начали игру!");
+            }
+        }
+
         private void SelectRandomSound()
         {
             Random r = new Random();
             int index = r.Next(0, soundsPaths.Count);
+            if (soundsPaths.Count <= 0)
+            {
+                MessageBox.Show("Список песен кончился!");
+                DeleteTemp();
+                Init();
+                return;
+            }
             currentSound = soundsPaths[index];
             soundsPaths.RemoveAt(index);
+            SetChooseButtons();
         }
 
         private static void ConvertMp3ToWav(string _inPath_, string _outPath_)
@@ -134,8 +219,36 @@ namespace AudioGuess
             {
                 using (WaveStream pcm = WaveFormatConversionStream.CreatePcmStream(mp3))
                 {
-                    WaveFileWriter.CreateWaveFile(_outPath_, pcm);
-                   
+                    WaveFileWriter.CreateWaveFile(_outPath_, pcm);                   
+                }
+            }
+        }
+
+        public void SetChooseButtons()
+        {
+            Random r = new Random();
+            int rnd = r.Next(0, 3);
+            var currentSoundFilename = currentSound.Substring(currentSound.LastIndexOf('\\') + 1);
+            var tempSoundsAllPaths = new List<String>(soundsAllPaths);
+            for (int i = 0; i < chooseButtons.Count; i++)
+            {
+               if(rnd == i)
+                {
+                    chooseButtons[i].Text = currentSoundFilename;
+                }
+                else
+                {
+                    var rnds = r.Next(0, tempSoundsAllPaths.Count);
+                    var randomSoundPath = tempSoundsAllPaths[rnds];
+                    var randomSoundFilename = randomSoundPath.Substring(randomSoundPath.LastIndexOf('\\') + 1);
+                    while(randomSoundFilename == currentSoundFilename)
+                    {
+                        rnds = r.Next(0, tempSoundsAllPaths.Count);
+                        randomSoundPath = tempSoundsAllPaths[rnds];
+                        randomSoundFilename = randomSoundPath.Substring(randomSoundPath.LastIndexOf('\\') + 1);
+                    }
+                    tempSoundsAllPaths.Remove(randomSoundPath);
+                    chooseButtons[i].Text = randomSoundFilename;
                 }
             }
         }

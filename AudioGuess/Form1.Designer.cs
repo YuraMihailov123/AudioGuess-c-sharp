@@ -74,6 +74,7 @@
             this.a1.TabIndex = 3;
             this.a1.Text = "Вариант ответа";
             this.a1.UseVisualStyleBackColor = true;
+            this.a1.Click += new System.EventHandler(this.OnChooseButtonPressed);
             // 
             // play
             // 
@@ -93,6 +94,7 @@
             this.a2.TabIndex = 7;
             this.a2.Text = "Вариант ответа";
             this.a2.UseVisualStyleBackColor = true;
+            this.a2.Click += new System.EventHandler(this.OnChooseButtonPressed);
             // 
             // a3
             // 
@@ -102,6 +104,7 @@
             this.a3.TabIndex = 8;
             this.a3.Text = "Вариант ответа";
             this.a3.UseVisualStyleBackColor = true;
+            this.a3.Click += new System.EventHandler(this.OnChooseButtonPressed);
             // 
             // Form1
             // 
