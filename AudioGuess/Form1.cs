@@ -16,25 +16,22 @@ namespace AudioGuess
     {
         public string tempFolderPath = "";
         public string currentSound = "";
+
         public List<string> soundsPaths = new List<string>();
         public List<string> soundsAllPaths = new List<string>();
         public List<Button> chooseButtons = new List<Button>();
+
         public bool isStarted = false;
+
         public System.Media.SoundPlayer snd = null;
 
 
         public Form1()
         {
             InitializeComponent();
-            this.Text = "Угадай мелодию";
-            
+            this.Text = "Угадай мелодию";            
 
             Init();
-
-            var mp3Path = @"C:\Users\recon\OneDrive\Рабочий стол\test.mp3";
-            var outputPath = Path.ChangeExtension(mp3Path, ".trimmed.mp3");
-
-            //TrimMp3To30Sec(mp3Path, outputPath, 2);
         }
 
         public void Init()
@@ -64,7 +61,6 @@ namespace AudioGuess
        
         public void TrimMp3To30Sec(string mp3Path, string outputPath, int minute)
         {
-
             TrimMp3(mp3Path, outputPath, TimeSpan.FromMinutes(minute), TimeSpan.FromMinutes(minute + 0.5f));
         }
 
