@@ -28,96 +28,95 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.folderPathLabel = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.folderButton = new System.Windows.Forms.Button();
+            this.startButton = new System.Windows.Forms.Button();
+            this.pathLabel = new System.Windows.Forms.Label();
             this.a1 = new System.Windows.Forms.Button();
-            this.play = new System.Windows.Forms.Button();
             this.a2 = new System.Windows.Forms.Button();
             this.a3 = new System.Windows.Forms.Button();
+            this.playButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // folderButton
             // 
-            this.button1.Location = new System.Drawing.Point(13, 13);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(123, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Выбрать папку";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.selectFilesButton_Click);
+            this.folderButton.Location = new System.Drawing.Point(13, 13);
+            this.folderButton.Name = "folderButton";
+            this.folderButton.Size = new System.Drawing.Size(102, 23);
+            this.folderButton.TabIndex = 0;
+            this.folderButton.Text = "Выбрать папку";
+            this.folderButton.UseVisualStyleBackColor = true;
+            this.folderButton.Click += new System.EventHandler(this.SelectFilesButton_Click);
             // 
-            // folderPathLabel
+            // startButton
             // 
-            this.folderPathLabel.AutoSize = true;
-            this.folderPathLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.folderPathLabel.Location = new System.Drawing.Point(12, 69);
-            this.folderPathLabel.Name = "folderPathLabel";
-            this.folderPathLabel.Size = new System.Drawing.Size(0, 13);
-            this.folderPathLabel.TabIndex = 1;
+            this.startButton.Location = new System.Drawing.Point(13, 42);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(102, 23);
+            this.startButton.TabIndex = 1;
+            this.startButton.Text = "Старт";
+            this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.StartButton_Click);
             // 
-            // button2
+            // pathLabel
             // 
-            this.button2.Location = new System.Drawing.Point(13, 43);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(123, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Старт";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.pathLabel.AutoSize = true;
+            this.pathLabel.Location = new System.Drawing.Point(13, 72);
+            this.pathLabel.Name = "pathLabel";
+            this.pathLabel.Size = new System.Drawing.Size(0, 13);
+            this.pathLabel.TabIndex = 2;
             // 
             // a1
             // 
-            this.a1.Location = new System.Drawing.Point(1, 334);
+            this.a1.Location = new System.Drawing.Point(3, 316);
             this.a1.Name = "a1";
-            this.a1.Size = new System.Drawing.Size(100, 80);
+            this.a1.Size = new System.Drawing.Size(102, 94);
             this.a1.TabIndex = 3;
-            this.a1.Text = "Вариант ответа";
+            this.a1.Text = "button1";
             this.a1.UseVisualStyleBackColor = true;
-            this.a1.Click += new System.EventHandler(this.OnChooseButtonPressed);
-            // 
-            // play
-            // 
-            this.play.Location = new System.Drawing.Point(95, 187);
-            this.play.Name = "play";
-            this.play.Size = new System.Drawing.Size(121, 44);
-            this.play.TabIndex = 6;
-            this.play.Text = "Воспроизвести";
-            this.play.UseVisualStyleBackColor = true;
-            this.play.Click += new System.EventHandler(this.play_Click);
+            this.a1.Click += new System.EventHandler(this.ObChooseButtonPressed);
             // 
             // a2
             // 
-            this.a2.Location = new System.Drawing.Point(105, 334);
+            this.a2.Location = new System.Drawing.Point(111, 316);
             this.a2.Name = "a2";
-            this.a2.Size = new System.Drawing.Size(100, 80);
-            this.a2.TabIndex = 7;
-            this.a2.Text = "Вариант ответа";
+            this.a2.Size = new System.Drawing.Size(102, 94);
+            this.a2.TabIndex = 4;
+            this.a2.Text = "button2";
             this.a2.UseVisualStyleBackColor = true;
-            this.a2.Click += new System.EventHandler(this.OnChooseButtonPressed);
+            this.a2.Click += new System.EventHandler(this.ObChooseButtonPressed);
             // 
             // a3
             // 
-            this.a3.Location = new System.Drawing.Point(211, 334);
+            this.a3.Location = new System.Drawing.Point(219, 316);
             this.a3.Name = "a3";
-            this.a3.Size = new System.Drawing.Size(100, 80);
-            this.a3.TabIndex = 8;
-            this.a3.Text = "Вариант ответа";
+            this.a3.Size = new System.Drawing.Size(102, 94);
+            this.a3.TabIndex = 5;
+            this.a3.Text = "button3";
             this.a3.UseVisualStyleBackColor = true;
-            this.a3.Click += new System.EventHandler(this.OnChooseButtonPressed);
+            this.a3.Click += new System.EventHandler(this.ObChooseButtonPressed);
+            // 
+            // playButton
+            // 
+            this.playButton.Location = new System.Drawing.Point(70, 161);
+            this.playButton.Name = "playButton";
+            this.playButton.Size = new System.Drawing.Size(181, 56);
+            this.playButton.TabIndex = 6;
+            this.playButton.Text = "Воспроизвести";
+            this.playButton.UseVisualStyleBackColor = true;
+            this.playButton.Click += new System.EventHandler(this.PlayButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(314, 450);
+            this.ClientSize = new System.Drawing.Size(326, 450);
+            this.Controls.Add(this.playButton);
             this.Controls.Add(this.a3);
             this.Controls.Add(this.a2);
-            this.Controls.Add(this.play);
             this.Controls.Add(this.a1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.folderPathLabel);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.pathLabel);
+            this.Controls.Add(this.startButton);
+            this.Controls.Add(this.folderButton);
             this.Name = "Form1";
             this.Text = "Form1";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.OnClosedForm);
@@ -127,13 +126,14 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label folderPathLabel;
-        private System.Windows.Forms.Button button2;
+
+        private System.Windows.Forms.Button folderButton;
+        private System.Windows.Forms.Button startButton;
+        private System.Windows.Forms.Label pathLabel;
         private System.Windows.Forms.Button a1;
-        private System.Windows.Forms.Button play;
         private System.Windows.Forms.Button a2;
         private System.Windows.Forms.Button a3;
+        private System.Windows.Forms.Button playButton;
     }
 }
 
